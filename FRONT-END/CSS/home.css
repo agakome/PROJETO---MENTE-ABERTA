@@ -34,6 +34,27 @@ margin: 10px;
 font-size: 25px;
 border: 20px;
 }
+.hidden{
+display: none;
+background-color: #fff;
+border: 1px solid black;
+list-style: none;
+width: 150px;
+box-shadow: 10px 5px 5px black;
+border-radius: 10px;
+}
+li{
+color: black;
+}
+a{
+text-decoration: none;
+}
+.menu:hover >.hidden{
+display: block;
+position: fixed;
+top: 100;
+right: 15px;
+}
 #sunmoom{
 font-size: 23px;
 border-radius: 20px;
