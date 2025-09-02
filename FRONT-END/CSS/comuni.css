@@ -16,7 +16,7 @@
 
     /* HEADER COM A LOGO*/
     header {
-      height: 80px;
+      height: 100px;
       background-color: #0466af;
       color: #fff;
       display: flex;
@@ -27,10 +27,6 @@
     header .logo { font-weight: bold; display: flex; align-items: center; gap: 8px; }
     header .icons { display: flex; gap: 10px; align-items: center; }
 
-    /* HEADER DE LINKAGEM */
-    .main{
-      margin-top: 20px;
-    }
     
     /* ACESSIBILIDADE – classe utilitária para rótulos invisíveis */
     .sr-only {
@@ -39,16 +35,11 @@
     }
     
     /* Botões de navegação */
-    .botao_escolha{
+    /* .botao_escolha{
       background-color: #0466af;
       color: #fff;
       font-size: 20px;
-    }
-
-    .logo{
-    width: px;
-    height: px;
-    }
+    } */
 
     /* CHAT */
     .chat-container {
@@ -77,6 +68,7 @@
     a{/* links no menu */
       text-decoration: none;
       color: #000000;
+      font-size: 20px;
     }
     .menu:hover >.hidden{
       display: block;
@@ -128,3 +120,8 @@
       cursor: pointer; font-size: 18px;
     }
     .chat-input button:active { transform: scale(0.98); }
+
+
+
+
+    
