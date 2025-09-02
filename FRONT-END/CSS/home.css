@@ -7,11 +7,11 @@ body{
     background-color: #aeb8fe;
 }
 header{
-height: 80px;
+height: 100px;
 display: flex;
 justify-content: space-between;
 align-items: center;
-background-color: blue;
+background-color: #0466af;
 color: #fff;
 padding: 10px;
 }
@@ -19,19 +19,30 @@ padding: 10px;
     width: px;
     height: px;
 }
+
+ /* HEADER DE LINKAGEM */
 .main{
-height: 50px;
-align-items: center;
-background-color: violet;
-padding: 10px;
+  height: 50px;
+  align-items: center;
+  background-color: #0466af;
+  padding: 10px;
+  margin-top: 20px;
 }
 .logo{
 font-size: 30px;
 color: #fff;
 }
+
+/* Botões de navegação */
+.escolha{
+    background-color: #0466af;
+    color: #fff;
+    font-size: 20px;
+}
+
 .menu{
 margin: 10px;
-font-size: 25px;
+font-size: 20px;
 border: 20px;
 }
 .hidden{
@@ -43,17 +54,20 @@ width: 150px;
 box-shadow: 10px 5px 5px black;
 border-radius: 10px;
 }
-li{
-color: black;
+li{ /* Menu lista */
+    color: #000000;
+    border: 1px solid;
+    border-radius: 2.5px ;
+    height: 45px;
 }
-a{
-text-decoration: none;
+a{ /* links no menu */
+    text-decoration: none;
 }
 .menu:hover >.hidden{
 display: block;
 position: fixed;
 top: 100;
-right: 15px;
+left: 15px;
 }
 #sunmoom{
 font-size: 23px;

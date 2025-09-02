@@ -1,0 +1,57 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../IMG/5789656.jpg");
+}
+.corpo{   
+    text-align: center;
+    width: 500px;
+    height: 700px;
+    margin-top: 10px;
+    background-color:#C3D5F5;
+}
+.novo{
+    border: 1px solid black;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.cabeca{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center ; 
+}
+.entrada{
+    width: 70%;
+    border-radius: 5px;
+    text-align: center;
+    padding: 15px;
+}
+.campo{
+    display: flex;
+    flex-direction:column;
+    justify-content: right;
+    align-items: center;
+    font-size: 18px; 
+    gap: 15px;
+    margin-bottom: 30px;
+}
+#button{
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 5px;
+    color:black;
+    background-color:#9CC8F7;
+}
+#vago{
+ display: flex;
+ justify-content: center;
+ flex-wrap: wrap;
+ gap: 10px;
+}
