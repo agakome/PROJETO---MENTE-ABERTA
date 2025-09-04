@@ -3,14 +3,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: url("../IMG/5789656.jpg");
-}
-.corpo{   
-    text-align: center;
-    width: 500px;
-    height: 700px;
-    margin-top: 10px;
-    background-color:#C3D5F5;
+    background-color:  #85b5db;
 }
 .novo{
     border: 3px solid black;
@@ -27,9 +20,13 @@ body{
     justify-content: center ; 
 }
 .entrada{
-    width: 70%;
+    width: 100%;
     border-radius: 5px;
     text-align: center;
+    margin-top: 20px;
+    font-size: 15px;
+    border: #000000;
+    box-shadow: 4px 5px 4px;
     padding: 15px;
 }
 .campo{
@@ -42,16 +39,12 @@ body{
     margin-bottom: 30px;
 }
 #button{
-    width: 150px;
+    width: 200px;
     height: 50px;
     font-size: 20px;
+    margin-left: 15%;
     border-radius: 5px;
-    color:black;
-    background-color:#9CC8F7;
-}
-#vago{
- display: flex;
- justify-content: center;
- flex-wrap: wrap;
- gap: 10px;
+    color: #fff;
+    border: #3987d0;
+    background-color:#3987d0;
 }
