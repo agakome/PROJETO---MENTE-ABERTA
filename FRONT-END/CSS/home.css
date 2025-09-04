@@ -115,10 +115,10 @@ margin: 30px 0px;
 } */
 section{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+    height: 100%; 
+    padding: 30px; 
+  }
+
 
 
 /* * Estilos padrão (modo claro) */ 
@@ -296,4 +296,129 @@ button.dark-mode {
 .open-notes-btn:hover {
   background-color: #e040fb;
   transform: scale(1.1);
+}
+/* ==== LAYOUT PRINCIPAL EM 2 COLUNAS (GRID) ==== */
+section.main-section {
+  display: grid !important;
+  grid-template-columns: 1fr minmax(320px, 600px);
+  align-items: center;
+  gap: 32px;
+  padding: 32px;
+}
+.carousel{
+  width: 50%;
+  border-radius: 10px;
+}
+
+/* Coluna esquerda (mood) - limpa padding exagerado */
+.mood {
+  padding: 16px !important;
+  margin: 0 !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+.mood p { margin-bottom: 12px; }
+.emoji-list {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.emoji-list svg {
+  width: 40px;
+  height: 40px;
+}
+
+/* Coluna direita - ancorar o carrossel à direita */
+.carousel-col { justify-self: end; }
+
+/* ==== CARROSSEL (estilo do print) ==== */
+.carousel-section {
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  background: #87b8e2;          /* azul claro do “cartão” */
+  border-radius: 16px;
+  padding: 16px 0;
+  overflow: visible;             /* setas podem “sair” da caixa */
+}
+
+.carousel-viewport {
+  overflow: hidden;
+  border-radius: 12px;
+  margin: 0 16px;                /* respiro lateral */
+}
+
+.carousel-container {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  will-change: transform;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.carousel-slide img {
+  width: 92%;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+/* Botões (pretos, fora do bloco) */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #000;
+  font-size: 2.4rem;
+  cursor: pointer;
+  z-index: 5;
+  transition: transform .2s;
+}
+.carousel-btn:hover { transform: translateY(-50%) scale(1.1); }
+.carousel-btn.prev { left: -36px; }
+.carousel-btn.next { right: -36px; }
+
+/* Dots dentro de uma cápsula azul escuro */
+.carousel-dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  margin: 12px auto 0;
+  background: #2a6eb2;
+  padding: 6px 12px;
+  border-radius: 999px;
+  width: fit-content;
+}
+.carousel-dots span {
+  width: 10px;
+  height: 10px;
+  background: #cfd8dc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+.carousel-dots span.active {
+  background: #fff;
+  transform: scale(1.1);
+}
+
+/* ==== RESPONSIVO ==== */
+@media (max-width: 900px) {
+  section.main-section {
+    grid-template-columns: 1fr;  /* empilha */
+  }
+  .carousel-col { justify-self: center; }
+  .carousel-btn.prev { left: -18px; }
+  .carousel-btn.next { right: -18px; }
+  .emoji-list svg { width: 34px; height: 34px; }
 }
