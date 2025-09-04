@@ -1,46 +1,4 @@
 // -------------------------
-// Chat (seu código original)
-// -------------------------
-const chatContainer = document.getElementById('chatContainer');
-const messageInput  = document.getElementById('messageInput');
-const sendButton    = document.getElementById('sendButton');
-
-function appendMessage(side, text) {
-  const msg = document.createElement('div');
-  msg.className = `message ${side}`;
-
-  const avatar = document.createElement('div');
-  avatar.className = 'avatar';
-  avatar.setAttribute('aria-hidden', 'true');
-
-  const bubble = document.createElement('div');
-  bubble.className = 'bubble';
-  bubble.textContent = text;
-
-  msg.appendChild(avatar);
-  msg.appendChild(bubble);
-  chatContainer.appendChild(msg);
-
-  chatContainer.scrollTop = chatContainer.scrollHeight;
-}
-
-function sendMessage() {
-  const text = messageInput.value.trim();
-  if (!text) return;
-  appendMessage('right', text);
-  messageInput.value = '';
-  messageInput.focus();
-}
-
-sendButton.addEventListener('click', sendMessage);
-messageInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    sendMessage();
-  }
-});
-
-// -------------------------
 // Bloco de Notas (Modal)
 // -------------------------
 const notesModal = document.getElementById("notesModal");

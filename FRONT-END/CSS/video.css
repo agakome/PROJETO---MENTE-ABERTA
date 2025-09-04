@@ -1,0 +1,150 @@
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background: #4d90cd;
+  margin: 5% auto;
+  padding: 20px;
+  border-radius: 15px;
+  width: 80%;
+  max-width: 700px;
+  color: #fff;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  text-align: center;
+}
+
+.close {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* NOTAS */
+.notes-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.note {
+  width: 120px;
+  height: 150px;
+  background: #fff;
+  color: #000;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.note:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+.note textarea {
+  flex: 1;
+  border: none;
+  resize: none;
+  outline: none;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  background: transparent;
+}
+
+/* AÇÕES (LÁPIS + LIXEIRA) */
+.note .actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.note .action-btn {
+  background: #f0f0f0;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 6px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ícone do lápis */
+.note .action-btn.edit {
+  background: #4caf50;
+  color: white;
+}
+.note .action-btn.edit:hover {
+  background: #45a049;
+  transform: scale(1.1);
+}
+
+/* Ícone da lixeira */
+.note .action-btn.delete {
+  background: #f44336;
+  color: white;
+}
+.note .action-btn.delete:hover {
+  background: #d32f2f;
+  transform: scale(1.1);
+}
+
+/* BOTÃO DE NOVA NOTA */
+.add-note {
+  margin-top: 15px;
+  font-size: 24px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50%;
+  background: #2d2d85;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+.add-note:hover {
+  background: #1f1f6e;
+  transform: rotate(90deg);
+}
+
+/* BOTÃO FLUTUANTE DE ABRIR NOTAS */
+.open-notes-btn {
+  position: fixed;
+  bottom: 73px;
+  right: 20px;
+  background-color: #ff4081;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.open-notes-btn:hover {
+  background-color: #e040fb;
+  transform: scale(1.1);
+}
