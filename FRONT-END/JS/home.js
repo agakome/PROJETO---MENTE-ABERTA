@@ -135,3 +135,4 @@ function loadNotes() {
   const savedNotes = JSON.parse(localStorage.getItem("notes")) || [];
   savedNotes.forEach(text => createNote(text));
 }
+
