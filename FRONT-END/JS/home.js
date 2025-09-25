@@ -33,6 +33,7 @@ function sendMessage() {
 }
 
 sendButton.addEventListener('click', sendMessage);
+
 messageInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
     e.preventDefault();
@@ -67,8 +68,6 @@ window.addEventListener("click", (event) => {
   }
 });
 
-// ------ AQUI ESTÁ A IMPLEMENTAÇÃO DO LÁPIS E LIXEIRA ------
-
 // Cria uma nota com textarea + botões (lápis e lixeira)
 function createNote(text = "") {
   const note = document.createElement("div");
@@ -83,7 +82,7 @@ function createNote(text = "") {
   const actions = document.createElement("div");
   actions.classList.add("actions");
 
-  // Botão lápis (editar = focar no textarea)
+  // Botão lápis
   const editBtn = document.createElement("button");
   editBtn.className = "action-btn";
   editBtn.title = "Editar";
@@ -96,7 +95,7 @@ function createNote(text = "") {
     textarea.value = v;
   });
 
-  // Botão lixeira (apagar a nota)
+  // Botão lixeira
   const deleteBtn = document.createElement("button");
   deleteBtn.className = "action-btn";
   deleteBtn.title = "Excluir";
@@ -121,7 +120,7 @@ addNoteBtn.addEventListener("click", () => {
   saveNotes();
 });
 
-// Salvar notas no localStorage (somente os textos)
+// Salvar notas no localStorage
 function saveNotes() {
   const notes = Array.from(document.querySelectorAll(".note textarea")).map(
     note => note.value
@@ -129,10 +128,35 @@ function saveNotes() {
   localStorage.setItem("notes", JSON.stringify(notes));
 }
 
-// Carregar notas ao abrir modal
+// Carregar notas
 function loadNotes() {
   notesContainer.innerHTML = "";
   const savedNotes = JSON.parse(localStorage.getItem("notes")) || [];
   savedNotes.forEach(text => createNote(text));
 }
 
+// -------------------------
+// Emojis de Humor
+// -------------------------
+const emojis = document.querySelectorAll(".emoji");
+const moodMessage = document.getElementById("moodMessage");
+
+const mensagens = {
+  feliz: "Que bom que você está feliz! Continue espalhando essa energia positiva 🌟",
+  triste: "Tudo bem não estar bem às vezes. Respire fundo, você não está sozinho 💙",
+  ansioso: "Tente se acalmar, um passo de cada vez. Você é mais forte do que pensa 🌿",
+  raiva: "É normal sentir raiva. Experimente relaxar e liberar essa energia 💭",
+  amor: "Que lindo! O amor transforma os dias ✨"
+};
+
+emojis.forEach(emoji => {
+  emoji.addEventListener("click", () => {
+    // Remove o destaque de todos
+    emojis.forEach(e => e.classList.remove("active"));
+    // Ativa o clicado
+    emoji.classList.add("active");
+    // Mostra mensagem
+    const mood = emoji.getAttribute("data-mood");
+    moodMessage.textContent = mensagens[mood] || "";
+  });
+});
