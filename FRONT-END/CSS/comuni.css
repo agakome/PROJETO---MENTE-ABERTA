@@ -61,23 +61,30 @@ header .icons { display: flex; gap: 10px; align-items: center; }
 .right { flex-direction: row-reverse; }
 .right .bubble { background: #3987d0; }
 
-/* INPUT */
 .chat-input {
+  position: fixed;
+  bottom: 20px; /* distância do rodapé */
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  gap: 10px;
   align-items: center;
-  padding: 10px;
-  background-color: #3987d0;
+  justify-content: center;
+  gap: 8px; /* espaço entre input e botão */
+  width: 100%;
 }
+
 .chat-input input {
-  flex: 1;
-  padding: 10px 14px;
+  flex: none;         /* tira o crescimento automático */
+  width: 30%;         /* deixa o input mais curto */
+  padding: 5px 10px;
   border-radius: 20px;
   border: none;
   outline: none;
   font-size: 16px;
   min-height: 40px;
+ 
 }
+
 .chat-input button {
   width: 44px; height: 44px;
   display: grid; place-items: center;
