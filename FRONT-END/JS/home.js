@@ -138,25 +138,35 @@ function loadNotes() {
 // -------------------------
 // Emojis de Humor
 // -------------------------
+// -------------------------
+// Emojis de Humor
+// -------------------------
 const emojis = document.querySelectorAll(".emoji");
 const moodMessage = document.getElementById("moodMessage");
 
 const mensagens = {
   feliz: "Que bom que você está feliz! Continue espalhando essa energia positiva 🌟",
+  amor: "Que lindo! O amor transforma os dias ✨",
   triste: "Tudo bem não estar bem às vezes. Respire fundo, você não está sozinho 💙",
-  ansioso: "Tente se acalmar, um passo de cada vez. Você é mais forte do que pensa 🌿",
-  raiva: "É normal sentir raiva. Experimente relaxar e liberar essa energia 💭",
-  amor: "Que lindo! O amor transforma os dias ✨"
+  chorando: "Chorar faz bem, mas você vai ficar bem 😢",
+  raiva: "É normal sentir raiva. Experimente relaxar e liberar essa energia 💭"
 };
 
+// Função para resetar todos os emojis
+function resetEmojis() {
+  emojis.forEach(e => e.classList.remove("active"));
+}
+
+// Adiciona clique em cada emoji
 emojis.forEach(emoji => {
   emoji.addEventListener("click", () => {
-    // Remove o destaque de todos
-    emojis.forEach(e => e.classList.remove("active"));
-    // Ativa o clicado
+    resetEmojis();
     emoji.classList.add("active");
-    // Mostra mensagem
+    
+    // Pega o atributo data-mood do emoji clicado
     const mood = emoji.getAttribute("data-mood");
+    
+    // Mostra mensagem correspondente
     moodMessage.textContent = mensagens[mood] || "";
   });
 });
