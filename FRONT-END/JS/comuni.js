@@ -1,137 +1,218 @@
-// -------------------------
-// Chat (seu código original)
-// -------------------------
-const chatContainer = document.getElementById('chatContainer');
-const messageInput  = document.getElementById('messageInput');
-const sendButton    = document.getElementById('sendButton');
+document.addEventListener("DOMContentLoaded", () => {
+  // -------------------------
+  // ELEMENTOS DO CHAT
+  // -------------------------
+  const chatContainer = document.getElementById("chatContainer");
+  const messageInput = document.getElementById("messageInput");
+  const sendButton = document.getElementById("sendButton");
+  const usuario_id = localStorage.getItem("usuario_id") || "1";
 
-function appendMessage(side, text) {
-  const msg = document.createElement('div');
-  msg.className = `message ${side}`;
+  let lastMessages = [];
 
-  const avatar = document.createElement('div');
-  avatar.className = 'avatar';
-  avatar.setAttribute('aria-hidden', 'true');
+  // Criar mensagem no chat
+  function appendMessage(text, userName = "Você") {
+    const msg = document.createElement("div");
+    msg.className = "message";
 
-  const bubble = document.createElement('div');
-  bubble.className = 'bubble';
-  bubble.textContent = text;
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+    bubble.textContent = text;
 
-  msg.appendChild(avatar);
-  msg.appendChild(bubble);
-  chatContainer.appendChild(msg);
+    const info = document.createElement("div");
+    info.className = "message-info";
+    info.textContent = userName;
 
-  chatContainer.scrollTop = chatContainer.scrollHeight;
-}
-
-function sendMessage() {
-  const text = messageInput.value.trim();
-  if (!text) return;
-  appendMessage('right', text);
-  messageInput.value = '';
-  messageInput.focus();
-}
-
-sendButton.addEventListener('click', sendMessage);
-messageInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    sendMessage();
+    msg.appendChild(bubble);
+    msg.appendChild(info);
+    chatContainer.appendChild(msg);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
   }
-});
 
-// -------------------------
-// Bloco de Notas (Modal)
-// -------------------------
-const notesModal = document.getElementById("notesModal");
-const openNotesBtn = document.getElementById("openNotesBtn");
-const closeModal = document.getElementById("closeModal");
-const notesContainer = document.getElementById("notesContainer");
-const addNoteBtn = document.getElementById("addNoteBtn");
+  // Enviar mensagem
+  async function sendMessage() {
+    const text = messageInput.value.trim();
+    if (!text) return;
 
-// Abrir modal
-openNotesBtn.addEventListener("click", () => {
-  notesModal.style.display = "block";
-  loadNotes();
-});
+    messageInput.value = "";
+    messageInput.focus();
 
-// Fechar modal
-closeModal.addEventListener("click", () => {
-  notesModal.style.display = "none";
-});
+    try {
+      const res = await fetch("http://localhost:3000/Comunidade/Mensagem", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ usuario_id, mensagem: text }),
+      });
 
-// Fechar clicando fora
-window.addEventListener("click", (event) => {
-  if (event.target === notesModal) {
+      if (res.ok) appendMessage(text, "Você");
+    } catch (err) {
+      console.error("Erro ao enviar mensagem:", err);
+    }
+  }
+
+  sendButton.addEventListener("click", sendMessage);
+  messageInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  // Buscar mensagens
+  async function loadMessages() {
+    try {
+      const res = await fetch("http://localhost:3000/Comunidade/Mensagem");
+      const mensagens = await res.json();
+
+      mensagens.forEach((msg) => {
+        const exists = lastMessages.find((m) => m.id === msg.id);
+        if (!exists) {
+          const name =
+            msg.usuario_id == usuario_id
+              ? "Você"
+              : `Usuário ${msg.usuario_id}`;
+          appendMessage(msg.mensagem, name);
+          lastMessages.push(msg);
+        }
+      });
+    } catch (err) {
+      console.error("Erro ao buscar mensagens:", err);
+    }
+  }
+
+  loadMessages();
+  setInterval(loadMessages, 2000);
+
+  // -------------------------
+  // BLOCO DE NOTAS
+  // -------------------------
+  const notesModal = document.getElementById("notesModal");
+  const openNotesBtn = document.getElementById("openNotesBtn");
+  const closeModal = document.getElementById("closeModal");
+  const notesContainer = document.getElementById("notesContainer");
+  const addNoteBtn = document.getElementById("addNoteBtn");
+
+  // Abrir e fechar modal
+  openNotesBtn.addEventListener("click", () => {
+    notesModal.style.display = "block";
+    loadNotes();
+  });
+
+  closeModal.addEventListener("click", () => {
     notesModal.style.display = "none";
+  });
+
+  window.addEventListener("click", (event) => {
+    if (event.target === notesModal) notesModal.style.display = "none";
+  });
+
+  // Função debounce (para salvar com atraso ao digitar)
+  function debounce(func, delay = 600) {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => func(...args), delay);
+    };
+  }
+
+  // Criar nota na tela
+  function createNote(nota) {
+    const note = document.createElement("div");
+    note.classList.add("note");
+
+    const textarea = document.createElement("textarea");
+    textarea.value = nota.conteudo || "";
+
+    // Atualizar nota (PUT)
+    const updateNote = debounce(async () => {
+      try {
+        await fetch(`http://localhost:3000/Notas/${nota.id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ conteudo: textarea.value }),
+        });
+      } catch (err) {
+        console.error("Erro ao atualizar nota:", err);
+      }
+    });
+
+    textarea.addEventListener("input", updateNote);
+
+    // Botões de ação
+    const actions = document.createElement("div");
+    actions.classList.add("actions");
+
+    const editBtn = document.createElement("button");
+    editBtn.className = "action-btn edit";
+    editBtn.title = "Editar nota";
+    editBtn.textContent = "✏️";
+    editBtn.addEventListener("click", () => textarea.focus());
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.className = "action-btn delete";
+    deleteBtn.title = "Excluir nota";
+    deleteBtn.textContent = "🗑️";
+    deleteBtn.addEventListener("click", async () => {
+      try {
+        const res = await fetch(`http://localhost:3000/Notas/${nota.id}`, {
+          method: "DELETE",
+        });
+        if (!res.ok) throw new Error("Erro ao excluir nota");
+        note.remove();
+
+        // Atualiza lista após excluir
+        const restantes = notesContainer.querySelectorAll(".note");
+        if (restantes.length === 0) {
+          const msg = document.createElement("p");
+          msg.textContent = "Nenhuma nota encontrada.";
+          msg.classList.add("empty-msg");
+          notesContainer.appendChild(msg);
+        }
+      } catch (err) {
+        console.error("Erro ao excluir nota:", err);
+      }
+    });
+
+    actions.appendChild(editBtn);
+    actions.appendChild(deleteBtn);
+
+    note.appendChild(textarea);
+    note.appendChild(actions);
+    notesContainer.appendChild(note);
+  }
+
+  // Adicionar nova nota
+  addNoteBtn.addEventListener("click", async () => {
+    try {
+      const res = await fetch("http://localhost:3000/Notas", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ usuario_id, conteudo: "" }),
+      });
+      const novaNota = await res.json();
+      createNote(novaNota);
+    } catch (err) {
+      console.error("Erro ao criar nota:", err);
+    }
+  });
+
+  // Carregar notas do usuário
+  async function loadNotes() {
+    notesContainer.innerHTML = "";
+    try {
+      const res = await fetch(`http://localhost:3000/Notas/${usuario_id}`);
+      const notas = await res.json();
+
+      if (notas.length === 0) {
+        const msg = document.createElement("p");
+        msg.textContent = "Nenhuma nota encontrada.";
+        msg.classList.add("empty-msg");
+        notesContainer.appendChild(msg);
+        return;
+      }
+
+      notas.forEach((nota) => createNote(nota));
+    } catch (err) {
+      console.error("Erro ao carregar notas:", err);
+    }
   }
 });
-
-// ------ AQUI ESTÁ A IMPLEMENTAÇÃO DO LÁPIS E LIXEIRA ------
-
-// Cria uma nota com textarea + botões (lápis e lixeira)
-function createNote(text = "") {
-  const note = document.createElement("div");
-  note.classList.add("note");
-
-  // Texto da nota
-  const textarea = document.createElement("textarea");
-  textarea.value = text;
-  textarea.addEventListener("input", saveNotes);
-
-  // Barra de ações
-  const actions = document.createElement("div");
-  actions.classList.add("actions");
-
-  // Botão lápis (editar = focar no textarea)
-  const editBtn = document.createElement("button");
-  editBtn.className = "action-btn";
-  editBtn.title = "Editar";
-  editBtn.textContent = "✏️";
-  editBtn.addEventListener("click", () => {
-    textarea.focus();
-    // move o cursor para o fim
-    const v = textarea.value;
-    textarea.value = "";
-    textarea.value = v;
-  });
-
-  // Botão lixeira (apagar a nota)
-  const deleteBtn = document.createElement("button");
-  deleteBtn.className = "action-btn";
-  deleteBtn.title = "Excluir";
-  deleteBtn.textContent = "🗑️";
-  deleteBtn.addEventListener("click", () => {
-    note.remove();
-    saveNotes();
-  });
-
-  actions.appendChild(editBtn);
-  actions.appendChild(deleteBtn);
-
-  note.appendChild(textarea);
-  note.appendChild(actions);
-
-  notesContainer.appendChild(note);
-}
-
-// Adicionar nova nota
-addNoteBtn.addEventListener("click", () => {
-  createNote("");
-  saveNotes();
-});
-
-// Salvar notas no localStorage (somente os textos)
-function saveNotes() {
-  const notes = Array.from(document.querySelectorAll(".note textarea")).map(
-    note => note.value
-  );
-  localStorage.setItem("notes", JSON.stringify(notes));
-}
-
-// Carregar notas ao abrir modal
-function loadNotes() {
-  notesContainer.innerHTML = "";
-  const savedNotes = JSON.parse(localStorage.getItem("notes")) || [];
-  savedNotes.forEach(text => createNote(text));
-}

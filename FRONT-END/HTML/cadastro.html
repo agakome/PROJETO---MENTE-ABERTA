@@ -1,40 +1,35 @@
 <!DOCTYPE html>
-<html lang="Pt">
+<html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href= "../CSS/cadastro.css">
-    <title>Cadastro</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="../CSS/cadastro.css">
+  <title>Cadastro</title>
 </head>
 <body>
-    
-    <form >
-      
-        <div class="campo">
+  <form id="registerForm" novalidate>
+    <div class="campo">
+      <div class="cabeca">
+        <img src="../IMG/logo_principal (3).png" alt="logo" width="290" height="270">
+      </div>
 
-            <div class="cabeca">
-              <img src="../IMG/logo_principal (3).png" alt="logo" width="290px" height="270px">
-            </div>
+      <input id="email" class="entrada" type="email" placeholder="Digite seu email..."
+             title="ex: exemplo@extensão.com" required>
 
-            <input class="entrada" type="email" placeholder="Digite seu email..."
-            title="Digite um e-mail válido, ex: exemplo@extensão.com" required
-            >
+      <input id="senha" class="entrada" type="password" placeholder="Digite sua senha..."
+             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}"
+             title="Mínimo 8 caracteres, incluindo maiúscula, minúscula, número e especial." required>
 
-            <input class="entrada" type="password" placeholder="Digite sua senha..."
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" 
-            title="A senha deve ter no mínimo 8 caracteres, incluindo letra maiúscula e minúscula, número e caractere especial." required
-            >
+      <input id="novasenha" class="entrada" type="password" placeholder="Confirme sua senha..."
+             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}"
+             title="Mínimo 8 caracteres, incluindo maiúscula, minúscula, número e especial." required>
+    </div>
 
-            <input class="entrada" type="password" placeholder="Confirme sua senha..."
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" 
-            title="A senha deve ter no mínimo 8 caracteres, incluindo letra maiúscula e minúscula, número e caractere especial." required
-            >
-            
-        </div>
-        <button id="button">Cadastrar</button>
-        
-    </form>
+    <button id="button" type="submit">Cadastrar</button>
+    <p id="registerMessage" aria-live="polite"></p>
+  </form>
 
-    <script src="../JS/cadastro.js"></script>
+  <!-- Use defer para garantir que o DOM esteja pronto, ou deixe no fim do body (aqui está no fim) -->
+  <script src="../JS/cadastro.js" defer></script>
 </body>
 </html>

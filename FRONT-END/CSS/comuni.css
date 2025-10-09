@@ -8,7 +8,7 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #74a9cf;
+  background-color: #85b5db;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -17,7 +17,7 @@ body {
 /* HEADER */
 header {
   height: 100px;
-  background-color: #0066b2;
+  background-color: #0466af;
   color: #fff;
   display: flex;
   align-items: center;
@@ -57,47 +57,47 @@ header .icons { display: flex; gap: 10px; align-items: center; }
   word-wrap: break-word;
   word-break: break-word;
 }
-.left .bubble  { background: #2d2d85; }
+.left .bubble  { background: #27187e; }
 .right { flex-direction: row-reverse; }
-.right .bubble { background: #4aa3df; }
+.right .bubble { background: #3987d0; }
 
-/* INPUT */
 .chat-input {
+  position: fixed;
+  bottom: 20px; /* distância do rodapé */
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  gap: 10px;
   align-items: center;
-  padding: 10px;
-  background: #4d90cd;
+  justify-content: center;
+  gap: 8px; /* espaço entre input e botão */
+  width: 100%;
 }
+
 .chat-input input {
-  flex: 1;
-  padding: 10px 14px;
+  flex: none;         /* tira o crescimento automático */
+  width: 30%;         /* deixa o input mais curto */
+  padding: 5px 10px;
   border-radius: 20px;
   border: none;
   outline: none;
   font-size: 16px;
   min-height: 40px;
+ 
 }
+
 .chat-input button {
   width: 44px; height: 44px;
   display: grid; place-items: center;
-  background: #2d2d85; color: #fff;
+  background: #27187e; color: #fff;
   border: none; border-radius: 50%;
   cursor: pointer; font-size: 18px;
 }
 .chat-input button:active { transform: scale(0.98); }
 
-/* MODAL */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
-}
+
 .hidden{
   display: none;
+
 }
 .menu:hover >.hidden{
   display: flex;
@@ -115,13 +115,28 @@ header .icons { display: flex; gap: 10px; align-items: center; }
 li{
   list-style: none;
   border-bottom: #000 1px solid;
+  padding: 5px;
+  margin-bottom: 10px;
+  font-size: 20px;
 }
 a{
   text-decoration: none;
+  color: #000;
+ 
+}
+
+/* Bloco de notas */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
 }
 
 .modal-content {
-  background: #4d90cd;
+  background: #3987d0;
   margin: 5% auto;
   padding: 20px;
   border-radius: 15px;
@@ -186,7 +201,7 @@ a{
 }
 
 .note .action-btn {
-  background: #f0f0f0;
+  background: #fff;
   border: none;
   cursor: pointer;
   font-size: 16px;
@@ -227,13 +242,13 @@ a{
   padding: 10px 20px;
   border: none;
   border-radius: 50%;
-  background: #2d2d85;
+  background: #27187e;
   color: white;
   cursor: pointer;
   transition: transform 0.2s ease, background 0.3s ease;
 }
 .add-note:hover {
-  background: #1f1f6e;
+  background: #27187e;
   transform: rotate(90deg);
 }
 
@@ -242,8 +257,8 @@ a{
   position: fixed;
   bottom: 73px;
   right: 20px;
-  background-color: #ff4081;
-  color: white;
+  background-color: #fff;
+  color: black;
   border: none;
   border-radius: 50%;
   width: 50px;
@@ -253,10 +268,10 @@ a{
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.3s ease;
+  transition: transform 0.2s ease, background 0.3s ease ;
 }
 
 .open-notes-btn:hover {
-  background-color: #e040fb;
+  background-color: #f1eee5;
   transform: scale(1.1);
 }

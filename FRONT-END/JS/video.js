@@ -1,95 +1,160 @@
-// -------------------------
-// Bloco de Notas (Modal)
-// -------------------------
-const notesModal = document.getElementById("notesModal");
-const openNotesBtn = document.getElementById("openNotesBtn");
+// -----------------------------
+// LISTA DE VÍDEOS (YouTube)
+// -----------------------------
+const videos = [
+  {
+    title: "Introdução ao HTML",
+    category: "tutoriais",
+    url: "https://www.youtube.com/embed/pQN-pnXPaVg",
+    thumb: "https://img.youtube.com/vi/pQN-pnXPaVg/hqdefault.jpg"
+  },
+  {
+    title: "CSS para Iniciantes",
+    category: "tutoriais",
+    url: "https://www.youtube.com/embed/yfoY53QXEnI",
+    thumb: "https://img.youtube.com/vi/yfoY53QXEnI/hqdefault.jpg"
+  },
+  {
+    title: "Top Hits 2025 🎵",
+    category: "musica",
+    url: "https://www.youtube.com/embed/kJQP7kiw5Fk",
+    thumb: "https://img.youtube.com/vi/kJQP7kiw5Fk/hqdefault.jpg"
+  },
+  {
+    title: "Gameplay - GTA V",
+    category: "games",
+    url: "https://www.youtube.com/embed/QkkoHAzjnUs",
+    thumb: "https://img.youtube.com/vi/QkkoHAzjnUs/hqdefault.jpg"
+  },
+  {
+    title: "Stand-up com Humor",
+    category: "entretenimento",
+    url: "https://www.youtube.com/embed/LXb3EKWsInQ",
+    thumb: "https://img.youtube.com/vi/LXb3EKWsInQ/hqdefault.jpg"
+  },
+  {
+    title: "Aula de Matemática Básica",
+    category: "educacao",
+    url: "https://www.youtube.com/embed/HeQX2HjkcNo",
+    thumb: "https://img.youtube.com/vi/HeQX2HjkcNo/hqdefault.jpg"
+  }
+];
+
+// -----------------------------
+// ELEMENTOS DO DOM
+// -----------------------------
+const videoGrid = document.getElementById("videoGrid");
+const categoryButtons = document.querySelectorAll(".category-btn");
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
+
+// Modal
+const videoModal = document.getElementById("videoModal");
+const videoFrame = document.getElementById("videoFrame");
 const closeModal = document.getElementById("closeModal");
-const notesContainer = document.getElementById("notesContainer");
-const addNoteBtn = document.getElementById("addNoteBtn");
+const prevVideo = document.getElementById("prevVideo");
+const nextVideo = document.getElementById("nextVideo");
 
-// Abrir modal
-openNotesBtn.addEventListener("click", () => {
-  notesModal.style.display = "block";
-  loadNotes();
+let currentVideos = [...videos];
+let currentIndex = 0;
+
+// -----------------------------
+// FUNÇÕES PRINCIPAIS
+// -----------------------------
+
+document.getElementById("Trocar").addEventListener("click", () => {
+  document.body.classList.toggle("dark");
 });
 
-// Fechar modal
-closeModal.addEventListener("click", () => {
-  notesModal.style.display = "none";
+function renderVideos(list) {
+  videoGrid.innerHTML = "";
+
+  if (list.length === 0) {
+    videoGrid.innerHTML = "<p style='text-align:center;'>Nenhum vídeo encontrado.</p>";
+    return;
+  }
+
+  list.forEach((video, index) => {
+    const card = document.createElement("div");
+    card.classList.add("video-card");
+    card.innerHTML = `
+      <img src="${video.thumb}" alt="${video.title}">
+      <div class="video-info"><h3>${video.title}</h3></div>
+    `;
+    card.addEventListener("click", () => openModal(index));
+    videoGrid.appendChild(card);
+  });
+}
+
+function openModal(index) {
+  currentIndex = index;
+  videoFrame.src = currentVideos[currentIndex].url + "?autoplay=1";
+  videoModal.style.display = "flex";
+}
+
+function closeModalFunc() {
+  videoModal.style.display = "none";
+  videoFrame.src = "";
+}
+
+function showNextVideo() {
+  currentIndex = (currentIndex + 1) % currentVideos.length;
+  openModal(currentIndex);
+}
+
+function showPrevVideo() {
+  currentIndex = (currentIndex - 1 + currentVideos.length) % currentVideos.length;
+  openModal(currentIndex);
+}
+
+// -----------------------------
+// FILTRO POR CATEGORIA
+// -----------------------------
+categoryButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    categoryButtons.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    const category = btn.dataset.category;
+    if (category === "all") {
+      currentVideos = [...videos];
+    } else {
+      currentVideos = videos.filter((v) => v.category === category);
+    }
+    renderVideos(currentVideos);
+  });
 });
+
+// -----------------------------
+// PESQUISA
+// -----------------------------
+function handleSearch() {
+  const query = searchInput.value.toLowerCase();
+  const filtered = videos.filter((v) =>
+    v.title.toLowerCase().includes(query)
+  );
+  currentVideos = filtered;
+  renderVideos(filtered);
+}
+
+searchBtn.addEventListener("click", handleSearch);
+searchInput.addEventListener("keyup", (e) => {
+  if (e.key === "Enter") handleSearch();
+});
+
+// -----------------------------
+// CONTROLES DO MODAL
+// -----------------------------
+closeModal.addEventListener("click", closeModalFunc);
+nextVideo.addEventListener("click", showNextVideo);
+prevVideo.addEventListener("click", showPrevVideo);
 
 // Fechar clicando fora
-window.addEventListener("click", (event) => {
-  if (event.target === notesModal) {
-    notesModal.style.display = "none";
-  }
+window.addEventListener("click", (e) => {
+  if (e.target === videoModal) closeModalFunc();
 });
 
-// ------ AQUI ESTÁ A IMPLEMENTAÇÃO DO LÁPIS E LIXEIRA ------
-
-// Cria uma nota com textarea + botões (lápis e lixeira)
-function createNote(text = "") {
-  const note = document.createElement("div");
-  note.classList.add("note");
-
-  // Texto da nota
-  const textarea = document.createElement("textarea");
-  textarea.value = text;
-  textarea.addEventListener("input", saveNotes);
-
-  // Barra de ações
-  const actions = document.createElement("div");
-  actions.classList.add("actions");
-
-  // Botão lápis (editar = focar no textarea)
-  const editBtn = document.createElement("button");
-  editBtn.className = "action-btn";
-  editBtn.title = "Editar";
-  editBtn.textContent = "✏️";
-  editBtn.addEventListener("click", () => {
-    textarea.focus();
-    // move o cursor para o fim
-    const v = textarea.value;
-    textarea.value = "";
-    textarea.value = v;
-  });
-
-  // Botão lixeira (apagar a nota)
-  const deleteBtn = document.createElement("button");
-  deleteBtn.className = "action-btn";
-  deleteBtn.title = "Excluir";
-  deleteBtn.textContent = "🗑️";
-  deleteBtn.addEventListener("click", () => {
-    note.remove();
-    saveNotes();
-  });
-
-  actions.appendChild(editBtn);
-  actions.appendChild(deleteBtn);
-
-  note.appendChild(textarea);
-  note.appendChild(actions);
-
-  notesContainer.appendChild(note);
-}
-
-// Adicionar nova nota
-addNoteBtn.addEventListener("click", () => {
-  createNote("");
-  saveNotes();
-});
-
-// Salvar notas no localStorage (somente os textos)
-function saveNotes() {
-  const notes = Array.from(document.querySelectorAll(".note textarea")).map(
-    note => note.value
-  );
-  localStorage.setItem("notes", JSON.stringify(notes));
-}
-
-// Carregar notas ao abrir modal
-function loadNotes() {
-  notesContainer.innerHTML = "";
-  const savedNotes = JSON.parse(localStorage.getItem("notes")) || [];
-  savedNotes.forEach(text => createNote(text));
-}
+// -----------------------------
+// INICIALIZAÇÃO
+// -----------------------------
+renderVideos(videos);
