@@ -1,150 +1,269 @@
-/* MODAL */
+/* ------------------------------
+   Layout Geral
+--------------------------------*/
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--bg-color, #f5f5f5);
+  color: var(--text-color, #222);
+  margin: 0;
+  padding: 0;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+header {
+  height: 100px;
+  background-color: #0466af;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+}
+.hidden{
+  display: none;
+
+}
+.menu:hover >.hidden{
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  border: #000 1px solid;
+  border-radius: 10px;
+  background-color: white;
+  color: #000;
+  left: 10px;
+  top:60px;
+  padding: 5px;
+  gap: 5px;
+}
+li{
+  list-style: none;
+  border-bottom: #000 1px solid;
+  padding: 5px;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+a{
+  text-decoration: none;
+  color: #000;
+ 
+}
+.menu:hover >.hidden{
+display: block;
+position: fixed;
+top: 100;
+left: 15px;
+}
+
+/* ------------------------------
+   Campo de Pesquisa
+--------------------------------*/
+.pesquisa-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+  gap: 8px;
+}
+
+.pesquisa {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  width: 250px;
+  font-size: 15px;
+  background-color: var(--input-bg, #fff);
+  color: var(--text-color, #222);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.pesquisa:focus {
+  outline: none;
+  border-color: #4d90cd;
+}
+
+.pesquisa-container button {
+  background-color: #4d90cd;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  transition: background 0.3s ease;
+}
+
+.pesquisa-container button:hover {
+  background-color: #357ab7;
+}
+
+/* ------------------------------
+   Filtros de Categoria
+--------------------------------*/
+.category-filter {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 15px auto;
+  max-width: 600px;
+}
+
+.category-btn {
+  background-color: var(--btn-bg, #e0e0e0);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--btn-text, #000);
+}
+
+.category-btn:hover {
+  background-color: #4d90cd;
+  color: white;
+}
+
+.category-btn.active {
+  background-color: #4d90cd;
+  color: white;
+}
+
+/* ------------------------------
+   Grade de Vídeos
+--------------------------------*/
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.video-card {
+  background: var(--card-bg, #fff);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+}
+
+.video-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.video-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.video-info {
+  padding: 10px;
+}
+
+.video-info h3 {
+  margin: 0;
+  font-size: 16px;
+  text-align: center;
+  color: var(--text-color, #333);
+}
+
+/* ------------------------------
+   Modal (Player)
+--------------------------------*/
 .modal {
   display: none;
   position: fixed;
   z-index: 9999;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-content {
-  background: #4d90cd;
-  margin: 5% auto;
-  padding: 20px;
-  border-radius: 15px;
+  background: var(--card-bg, #fff);
+  padding: 15px;
+  border-radius: 10px;
   width: 80%;
   max-width: 700px;
-  color: #fff;
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   text-align: center;
+  transition: background 0.3s ease;
 }
 
 .close {
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-/* NOTAS */
-.notes-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.note {
-  width: 120px;
-  height: 150px;
-  background: #fff;
-  color: #000;
-  padding: 8px;
-  border-radius: 8px;
-  font-size: 14px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.note:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-}
-
-.note textarea {
-  flex: 1;
-  border: none;
-  resize: none;
-  outline: none;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  background: transparent;
-}
-
-/* AÇÕES (LÁPIS + LIXEIRA) */
-.note .actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 8px;
-}
-
-.note .action-btn {
-  background: #f0f0f0;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  line-height: 1;
-  padding: 6px;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-  color: #333;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Ícone do lápis */
-.note .action-btn.edit {
-  background: #4caf50;
-  color: white;
-}
-.note .action-btn.edit:hover {
-  background: #45a049;
-  transform: scale(1.1);
-}
-
-/* Ícone da lixeira */
-.note .action-btn.delete {
-  background: #f44336;
-  color: white;
-}
-.note .action-btn.delete:hover {
-  background: #d32f2f;
-  transform: scale(1.1);
-}
-
-/* BOTÃO DE NOVA NOTA */
-.add-note {
-  margin-top: 15px;
-  font-size: 24px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 50%;
-  background: #2d2d85;
-  color: white;
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.3s ease;
-}
-.add-note:hover {
-  background: #1f1f6e;
-  transform: rotate(90deg);
-}
-
-/* BOTÃO FLUTUANTE DE ABRIR NOTAS */
-.open-notes-btn {
-  position: fixed;
-  bottom: 73px;
+  position: absolute;
+  top: 10px;
   right: 20px;
-  background-color: #ff4081;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 28px;
+  color: var(--text-color, #333);
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.3s ease;
+  transition: color 0.2s ease;
 }
 
-.open-notes-btn:hover {
-  background-color: #e040fb;
-  transform: scale(1.1);
+.close:hover {
+  color: #4d90cd;
+}
+
+.modal iframe {
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+.modal-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.nav-btn {
+  background-color: #4d90cd;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.nav-btn:hover {
+  background-color: #357ab7;
+}
+
+/* ------------------------------
+   DARKMODE CONFIGURAÇÃO
+--------------------------------*/
+body.dark {
+  --bg-color: #121212;
+  --text-color: #f0f0f0;
+  --card-bg: #1e1e1e;
+  --btn-bg: #2a2a2a;
+  --btn-text: #f0f0f0;
+  --input-bg: #2a2a2a;
+}
+
+/* ------------------------------
+   Responsividade
+--------------------------------*/
+@media (max-width: 600px) {
+  .pesquisa {
+    width: 180px;
+  }
+  .modal-content {
+    width: 90%;
+  }
+  .nav-btn {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
 }
