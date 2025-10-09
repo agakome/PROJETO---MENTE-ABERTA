@@ -17,15 +17,18 @@
       margin-top: 20px;
     }
     .emoji {
-      width: 50px;
-      height: 50px;
+      font-size: 40px;
       cursor: pointer;
-      transition: transform 0.2s, fill 0.2s;
-      fill: #000;
+      transition: transform 0.2s;
     }
     .emoji.active {
       transform: scale(1.5);
-      fill: #ffcc00;
+      animation: pulse 0.6s ease-in-out;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1.5); }
+      50% { transform: scale(1.7); }
+      100% { transform: scale(1.5); }
     }
     #moodMessage {
       text-align: center;
@@ -33,6 +36,7 @@
       font-weight: bold;
       margin-top: 12px;
       color: #000;
+      display: block; /* garante que apareça */
     }
     /* ==== Carrossel Bootstrap ==== */
     .carousel {
@@ -58,7 +62,7 @@
       </ul>
     </div>
     <div class="logo">
-      <img src="../IMG/Mente_Aberta-removebg-preview.png" alt="logo" width="150" height="150">
+      <img src="../IMG/logo_principal (2).png" alt="logo" width="150" height="150">
     </div>
     <div>
       <button id="Trocar">
@@ -71,11 +75,11 @@
     <div class="mood">
       <p>Avalie seu humor de hoje! Como você está?</p>
       <div class="emoji-list">
-        <svg class="emoji" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7"/><path d="M4.5 7c.5 1 3 1 3 1s2.5-1 3-1"/><circle cx="5.5" cy="6" r="0.5"/><circle cx="10.5" cy="6" r="0.5"/></svg>
-        <svg class="emoji" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7"/><path d="M4.5 9c1 1.5 5 1.5 6 0"/><path d="M5.5 6c0 .5.5 1 1 1s1-.5 1-1"/><path d="M9.5 6c0 .5.5 1 1 1s1-.5 1-1"/></svg>
-        <svg class="emoji" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7"/><path d="M4.5 10c1.5-1 5.5-1 6 0"/><circle cx="5.5" cy="6" r="0.5"/><circle cx="10.5" cy="6" r="0.5"/></svg>
-        <svg class="emoji" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7"/><path d="M4.5 10c1.5-1 5.5-1 6 0"/><path d="M6 11l.5 1"/><path d="M10 11l-.5 1"/><circle cx="5.5" cy="6" r="0.5"/><circle cx="10.5" cy="6" r="0.5"/></svg>
-        <svg class="emoji" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7"/><path d="M4.5 10c1.5-1 5.5-1 6 0"/><circle cx="5.5" cy="6" r="0.5"/><circle cx="10.5" cy="6" r="0.5"/></svg>
+        <span class="emoji" data-mood="feliz">😀</span>
+        <span class="emoji" data-mood="amor">😍</span>
+        <span class="emoji" data-mood="triste">😔</span>
+        <span class="emoji" data-mood="chorando">😢</span>
+        <span class="emoji" data-mood="raiva">😡</span>
       </div>
       <p id="moodMessage"></p>
     </div>
@@ -84,15 +88,24 @@
     <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="https://lh3.googleusercontent.com/chat_attachment/AP1Ws4sK2Lm8uHS2Gj6CaN9UUXf26uCfRgXnn-rT6kHZt9R7HWSDXMcv5Gk_HNOEF_z4e_6ZgSqp4UuoaqHId2Osy89Z-tO7l046R45EdfI1F-U9wEan5pIpBJUgNXOuEWAUXb6zY4TYFeDd9bofbf__8n6c82NDTfShwcITlimB_DPBPOf5yTjVE31_h7ec8R8HXCW3MkTNyeOHYJbtpWmCkJXO2i5j9WsqCd7LE8dY8MzKND0QUuGP9KEaFZHXwFbzwUgXovAysBsnNShDJ5-EsiWdaE_UtmxHACXb6ISuYOLV0L5TR1i-E4Ov4XVuTE-pEJM=w512" class="d-block w-100" alt="Slide 1">
+          <img src="../IMG/image (1).png" class="d-block w-100" alt="Slide 1">
         </div>
         <div class="carousel-item">
-          <img src="https://lh3.googleusercontent.com/chat_attachment/AP1Ws4sDpk85iNTuSM7dPNQmHT--3WtlxYiRXIppvtCwFwmG2ApaOBGRCX7Xx0BB5C8QrvnjmLiNNIErH25c1bSAwnZcwceAcSj6_hNqYpEXafZasF-Q3fPOsdGP4_q2S18oGka2GqjaJT_W9rDBe13G1Nm4EipnZFxuInRJFnn08hgaNthYE4ejHlEQX2kVUbWTLyeA_X8nsXjn_AjwXMLC2XKeHZ7O1caKBuIqaIgbwzFNJ-v0CKcvgx27PSVLrRNAYeIyXTqK_pzl1WsymVR2nUe4Rx7A3GAZWIsnBHssrMVxIdYLlJ8BuBOxwTgnnzKGBuQ=w512" class="d-block w-100" alt="Slide 2">
+          <img src="../IMG/image (5).png" class="d-block w-100" alt="Slide 2">
         </div>
         <div class="carousel-item">
-          <img src="https://www.cartacapital.com.br/wp-content/uploads/2019/06/cerebro-1024x683.jpg" class="d-block w-100" alt="Slide 3">
+          <img src="../IMG/image (7).png" class="d-block w-100" alt="Slide 3">
         </div>
+         <div class="carousel-item">
+          <img src="../IMG/image (8).png" class="d-block w-100" alt="Slide 4">
+        </div>
+         <div class="carousel-item">
+          <img src="../IMG/image (9).png" class="d-block w-100" alt="Slide 5">
+        </div>
+         <div class="carousel-item">
+          <img src="../IMG/image (4).png" class="d-block w-100" alt="Slide 6">
       </div>
+
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Anterior</span>
@@ -105,6 +118,8 @@
         <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></button>
         <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"></button>
         <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"></button>
+        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="3"></button>
+        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="5"></button>
       </div>
     </div>
   </section>
@@ -121,27 +136,7 @@
   <button id="openNotesBtn" class="open-notes-btn">+</button>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  <script src="../JS/home.js"></script>
   <script src="../JS/Darkmode.js"></script>
-  
-  <script>
-    // Emojis
-    const emojis = document.querySelectorAll('.emoji');
-    const moodMessages = [
-      "Que bom que você está feliz! 😄",
-      "O amor está no ar! ❤️",
-      "Não fique triste, dias melhores virão 😔",
-      "Chorar faz bem, mas você vai ficar bem 😢",
-      "Respire fundo e acalme-se 😡"
-    ];
-    emojis.forEach((emoji, index) => {
-      emoji.addEventListener('click', () => {
-        emojis.forEach(e => e.classList.remove('active'));
-        emoji.classList.add('active');
-        document.getElementById('moodMessage').textContent = moodMessages[index];
-      });
-    });
-  </script>
-  
+  <script src="../JS/home.js"></script>
 </body>
 </html>

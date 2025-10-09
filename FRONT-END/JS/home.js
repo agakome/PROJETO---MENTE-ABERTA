@@ -1,9 +1,12 @@
 // -------------------------
 // Chat (seu código original)
+// -------------
+// -------------------------
+// Chat
 // -------------------------
 const chatContainer = document.getElementById('chatContainer');
 const messageInput  = document.getElementById('messageInput');
-const sendButton    = document.getElementById('sendButton');
+// const sendButton    = document.getElementById('sendButton');
 
 function appendMessage(side, text) {
   const msg = document.createElement('div');
@@ -32,14 +35,14 @@ function sendMessage() {
   messageInput.focus();
 }
 
-sendButton.addEventListener('click', sendMessage);
+// sendButton.addEventListener('click', sendMessage);
 
-messageInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    sendMessage();
-  }
-});
+// messageInput.addEventListener('keydown', (e) => {
+//   if (e.key === 'Enter') {
+//     e.preventDefault();
+//     sendMessage();
+//   }
+// });
 
 // -------------------------
 // Bloco de Notas (Modal)
@@ -68,34 +71,29 @@ window.addEventListener("click", (event) => {
   }
 });
 
-// Cria uma nota com textarea + botões (lápis e lixeira)
+// Cria uma nota
 function createNote(text = "") {
   const note = document.createElement("div");
   note.classList.add("note");
 
-  // Texto da nota
   const textarea = document.createElement("textarea");
   textarea.value = text;
   textarea.addEventListener("input", saveNotes);
 
-  // Barra de ações
   const actions = document.createElement("div");
   actions.classList.add("actions");
 
-  // Botão lápis
   const editBtn = document.createElement("button");
   editBtn.className = "action-btn";
   editBtn.title = "Editar";
   editBtn.textContent = "✏️";
   editBtn.addEventListener("click", () => {
     textarea.focus();
-    // move o cursor para o fim
     const v = textarea.value;
     textarea.value = "";
     textarea.value = v;
   });
 
-  // Botão lixeira
   const deleteBtn = document.createElement("button");
   deleteBtn.className = "action-btn";
   deleteBtn.title = "Excluir";
@@ -138,11 +136,10 @@ function loadNotes() {
 // -------------------------
 // Emojis de Humor
 // -------------------------
-// -------------------------
-// Emojis de Humor
-// -------------------------
-const emojis = document.querySelectorAll(".emoji");
+const emojis = document.querySelectorAll(".emoji")
 const moodMessage = document.getElementById("moodMessage");
+
+console.log(emojis)
 
 const mensagens = {
   feliz: "Que bom que você está feliz! Continue espalhando essa energia positiva 🌟",
@@ -168,5 +165,6 @@ emojis.forEach(emoji => {
     
     // Mostra mensagem correspondente
     moodMessage.textContent = mensagens[mood] || "";
+    moodMessage.style.display = "block"; // garante que a mensagem apareça
   });
 });

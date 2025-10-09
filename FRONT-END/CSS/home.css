@@ -7,59 +7,43 @@ body{
     min-height: 100vh;
     background-color: #aeb8fe;
 }
-header{
-height: 100px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-background-color: #0466af;
-color: #fff;
-padding: 10px;
-}
-.logo{
-    width: px;
-    height: px;
-}
-.main{
-  height: 50px;
-  align-items: center;
+header {
+  height: 100px;
   background-color: #0466af;
-  padding: 10px;
-  margin-top: 20px;
-}
-.logo{
-font-size: 30px;
-color: #fff;
-}
-.escolha{
-    background-color: #0466af;
-    color: #fff;
-    font-size: 20px;
-}
-.menu{
-margin: 10px;
-font-size: 20px;
-border: 20px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
 }
 .hidden{
-display: none;
-background-color: #fff;
-border: 1px solid black;
-list-style: none;
-width: 150px;
-box-shadow: 10px 5px 5px black;
-border-radius: 10px;
+  display: none;
+
+}
+.menu:hover >.hidden{
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  border: #000 1px solid;
+  border-radius: 10px;
+  background-color: white;
+  color: #000;
+  left: 10px;
+  top:60px;
+  padding: 5px;
+  gap: 5px;
 }
 li{
-    color: #000000;
-    border: 1px solid;
-    border-radius: 2.5px ;
-    height: 45px;
+  list-style: none;
+  border-bottom: #000 1px solid;
+  padding: 5px;
+  margin-bottom: 10px;
+  font-size: 20px;
 }
 a{
-    text-decoration: none;
-    color: #000000;
-    font-size: 20px;
+  text-decoration: none;
+  color: #000;
+ 
 }
 .menu:hover >.hidden{
 display: block;
