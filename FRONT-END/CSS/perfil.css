@@ -9,54 +9,49 @@ body {
   background-color: #aeb8fe;
 }
 
-/* === HEADER (Cabeçalho) === */
 header {
   height: 100px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   background-color: #0466af;
   color: #fff;
-  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
 }
-
-/* === HAMBUGUER (Menu) === */
-.menu {
-  margin: 10px;
-  font-size: 20px;
-  border: 20px;
-}
-
-.hidden {
+.hidden{
   display: none;
-  background-color: #fff;
-  border: 1px solid black;
-  list-style: none;
-  width: 150px;
-  box-shadow: 10px 5px 5px black;
+
+}
+.menu:hover >.hidden{
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  border: #000 1px solid;
   border-radius: 10px;
+  background-color: white;
+  color: #000;
+  left: 10px;
+  top:60px;
+  padding: 5px;
+  gap: 5px;
 }
-
-li {
-  /* Menu lista */
-  color: #000000;
-  border: 1px solid;
-  border-radius: 2.5px;
-  height: 45px;
-}
-
-a {
-  /* links no menu */
-  text-decoration: none;
-  color: #000000;
+li{
+  list-style: none;
+  border-bottom: #000 1px solid;
+  padding: 5px;
+  margin-bottom: 10px;
   font-size: 20px;
 }
-
-.menu:hover>.hidden {
-  display: block;
-  position: fixed;
-  top: 100;
-  left: 15px;
+a{
+  text-decoration: none;
+  color: #000;
+ 
+}
+.menu:hover >.hidden{
+display: block;
+position: fixed;
+top: 100;
+left: 15px;
 }
 
 /* === MAIN (Conteúdo Principal) === */
