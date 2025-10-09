@@ -71,7 +71,7 @@ function handleLogin(email, password, messageEl) {
     console.warn('Não foi possível salvar currentUser no localStorage:', err);
   }
 
-  setTimeout(() => window.location.replace('./comuni.html'), 700);
+  setTimeout(() => window.location.replace('./home.html'), 700);
 }
 
 function showMessage(el, text, color) {
