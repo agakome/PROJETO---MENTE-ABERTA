@@ -202,21 +202,21 @@ button.dark-mode {
   padding: 10px 20px;
   border: none;
   border-radius: 50%;
-  background: #2d2d85;
+  background: #27187e;
   color: white;
   cursor: pointer;
   transition: transform 0.2s ease, background 0.3s ease;
 }
 .add-note:hover {
-  background: #1f1f6e;
+  background: #27187e;
   transform: rotate(90deg);
 }
 .open-notes-btn {
   position: fixed;
   bottom: 73px;
   right: 20px;
-  background-color: #ff4081;
-  color: white;
+  background-color: #fff;
+  color: rgb(26, 11, 11);
   border: none;
   border-radius: 50%;
   width: 50px;
@@ -229,7 +229,7 @@ button.dark-mode {
   transition: transform 0.2s ease, background 0.3s ease;
 }
 .open-notes-btn:hover {
-  background-color: #e040fb;
+  background-color: #27187e;
   transform: scale(1.1);
 }
 section.main-section {
