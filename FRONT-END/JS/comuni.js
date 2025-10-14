@@ -65,8 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Buscar mensagens
   async function loadMessages() {
     try {
-  
-      const res = await fetch("http://192.168.1.10:3000/Comunidade/Mensagem");
+      const res = await fetch("http://localhost:3000/Comunidade/Mensagem");
       const mensagens = await res.json();
       if(mensagens.length > 0){
             lastMessages = []
