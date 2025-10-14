@@ -43,7 +43,12 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify({ usuario_id, mensagem: text }),
       });
 
-      if (res.ok) appendMessage(text, "Você");
+      if (res.ok) 
+      {              
+        // chatContainer.remove()
+        appendMessage(text, "Você");
+      }
+    
     } catch (err) {
       console.error("Erro ao enviar mensagem:", err);
     }
@@ -60,9 +65,23 @@ document.addEventListener("DOMContentLoaded", () => {
   // Buscar mensagens
   async function loadMessages() {
     try {
+  
       const res = await fetch("http://localhost:3000/Comunidade/Mensagem");
       const mensagens = await res.json();
+      if(mensagens.length > 0){
+            lastMessages = []
+            const msg = document.querySelectorAll('.message')
+                        console.log(msg
 
+
+
+
+                        )
+
+           msg.forEach(element => {
+        element.remove();
+    });
+      }
       mensagens.forEach((msg) => {
         const exists = lastMessages.find((m) => m.id === msg.id);
         if (!exists) {
@@ -80,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   loadMessages();
-  setInterval(loadMessages, 2000);
+  setInterval(loadMessages, 5000);
 
   // -------------------------
   // BLOCO DE NOTAS
